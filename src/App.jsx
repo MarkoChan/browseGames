@@ -1,27 +1,33 @@
+import { useEffect, useState } from 'react';
 import './App.css'
 import GameCard from './components/GameCard'
 
 function App() {
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    console.log("test");
+    fetch('http://localhost:3001/api/games')
+      .then(res => res.json())
+      .then(data => setGames(data))
+      .catch(err => console.error("Fetch error:", err));
+  }, [])
+
   return (
     <div>
       <table>
-        <tr>
-            <th><GameCard game={{cover:"src/assets/honse.png", title:"Honse 2", price:"$2.50", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/cowboy.png", title:"Cowboy Man", price:"$21.50", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-        </tr>
-        <tr>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-        </tr>
+        <tbody>
+          <tr>
+            {games.map((game) => (
+              <th key={game.id}>
+                <GameCard game={game} />
+              </th>
+            ))}
+          </tr>
+        </tbody>
       </table>
     </div>
-  )
+  );
 }
 
 export default App

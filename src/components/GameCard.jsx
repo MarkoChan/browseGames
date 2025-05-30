@@ -25,7 +25,7 @@ function GameCard({game}){
     return (
         <div className="game_card" onClick={onCardClick}>
             <div className="game_cover">
-                <img src={game.cover} alt={game.title}/>
+                <img src={game.thumbnail} alt={game.title}/>
             </div>
             <div className="game_overlay">
                 <button
