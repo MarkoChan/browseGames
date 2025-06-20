@@ -1,5 +1,5 @@
 /* Game banner style */
-.banner_game {
+.banner-game {
     position: relative;
     width: 100%;
     max-width: 1280px;
@@ -7,13 +7,13 @@
     cursor: pointer;
 }
 
-.banner_cover {
+.banner-cover {
     position: relative;
     width: 100%;
     height: auto;
 }
 
-.banner_cover img {
+.banner-cover img {
     display: block;
     width: 100%;
     height: auto;
@@ -22,14 +22,14 @@
 }
 
 /* Game info style */
-.banner_info_container {
+.banner-info-container {
     position: absolute;
     bottom: 20px;
     left: 20px;
     z-index: 2;
 }
 
-.banner_info_overlay {
+.banner-info-overlay {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -40,18 +40,18 @@
     font-size: 16px;
 }
 
-.banner_text h3 {
+.banner-text h3 {
     margin: 0;
     font-size: 18px;
 }
 
-.banner_text p {
+.banner-text p {
     margin: 4px 0 0;
     font-size: 14px;
 }
 
 /* Wishlist button style */
-.banner_wishlist_btn {
+.banner-wishlist-btn {
     background-color: white;
     color: black;
     border: none;
@@ -65,7 +65,7 @@
     white-space: nowrap;
 }
 
-.banner_wishlist_btn.wishlisted {
+.banner-wishlist-btn.wishlisted {
     background-color: rgb(241, 72, 100);
     color: white;
 }

@@ -1,0 +1,32 @@
+.sidebar-container {
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #252934;
+  padding: 10px;
+  border-right: 1px solid #a9a9a9;
+}
+
+.sidebar-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+.sidebar-item {
+    padding: 12px 16px;
+    color: rgb(226, 226, 226);
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #444;
+}
+
+.sidebar-item:hover {
+    background-color: #333;
+}
+
+.sidebar-item.active {
+    background-color: #444;
+    font-weight: bold;
+}
