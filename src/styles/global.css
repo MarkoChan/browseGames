@@ -5,6 +5,8 @@ html, body {
 }
 
 body {
-    background-color: rgb(33, 33, 41);
-    color: #ffffff;
+  background-color: rgb(33, 33, 41);
+  background-image: radial-gradient(rgba(255,255,255, 0.3) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #ffffff;
 }

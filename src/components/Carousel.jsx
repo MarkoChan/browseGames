@@ -62,12 +62,6 @@ function Carousel({
     }, 350);
   }
 
-  function handleAutoScroll() {
-    if (!isHovered) {
-      scrollNext();
-    }
-  }
-
   // set initial scroll position to first real item
   useEffect(() => {
     const initialOffset = scrollByAmount() * visibleCount;
@@ -75,6 +69,12 @@ function Carousel({
   }, []);
 
   // autoscroll logic
+  function handleAutoScroll() {
+    if (!isHovered) {
+      scrollNext();
+    }
+  }
+
   useEffect(() => {
     // autoscroll disabled
     if (!autoScroll) return;

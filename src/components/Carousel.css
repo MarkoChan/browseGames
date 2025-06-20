@@ -1,3 +1,4 @@
+/* Carousel contianer */
 .carousel-wrapper {
   position: relative;
   display: flex;
@@ -25,6 +26,7 @@
   scroll-behavior: smooth;
 }
 
+/* Carousel items */
 .carousel-item {
   scroll-snap-align: start;
   flex-shrink: 0;
