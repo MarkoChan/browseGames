@@ -2,24 +2,18 @@ import './GameCard.css'
 import { useState } from 'react';
 
 function GameCard({game}){
+    // init gamecard state
     const [wishlisted, setWishlisted] = useState(game.wishlisted);
 
+    // game card click handler
     function onCardClick() {
-        if (wishlisted === 1) {
-            alert("is wl");
-        } else {
-            alert("not wl");
-        }
+        alert(wishlisted === 1 ? "is wl" : "not wl");
     }
 
+    // wishlist button click handler
     function onWishlistClick(e) {
         e.stopPropagation();
-
-        if (wishlisted === 1) {
-            setWishlisted(0);
-        } else {
-            setWishlisted(1);
-        }
+        setWishlisted(wishlisted === 1 ? 0 : 1);
     }
 
     return (
@@ -29,7 +23,7 @@ function GameCard({game}){
             </div>
             <div className="game_overlay">
                 <button
-                className={wishlisted === 1 ? "wishlist_btn_act" : "wishlist_btn_deact"}
+                className={`wishlist_icon_btn ${wishlisted === 1 ? 'wishlisted' : ''}`}
                 onClick={onWishlistClick}
                 aria-label="Toggle wishlist"
                 >

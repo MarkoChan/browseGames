@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import './styles/Navbar.css';
@@ -8,8 +8,18 @@ function App() {
   return (
     <Router>
       <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
+        <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Home
+        </NavLink>
+        <NavLink to="/Wishlist" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Wishlist
+        </NavLink>
+        <NavLink to="/Profile" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Profile
+        </NavLink>
+        <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          About
+        </NavLink>
       </nav>
 
       <Routes>
