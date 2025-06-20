@@ -1,9 +1,13 @@
 import './GameCard.css'
 import { useState } from 'react';
 
-function GameCard({game}){
+function GameCard({game, scale = 1}){
     // init gamecard state
     const [wishlisted, setWishlisted] = useState(game.wishlisted);
+    const cardStyle = {
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+    };
 
     // game card click handler
     function onCardClick() {
@@ -17,7 +21,7 @@ function GameCard({game}){
     }
 
     return (
-        <div className="game_card" onClick={onCardClick}>
+        <div className="game_card" onClick={onCardClick} style={cardStyle}>
             <div className="game_cover">
                 <img src={game.cover} alt={game.title}/>
             </div>

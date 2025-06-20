@@ -1,23 +1,26 @@
 .game_card {
     position: relative;
-    background-color: rgb(33, 33, 41);
+    background-color: rgb(30, 30, 38);
     padding: 10px;
     padding-top: 30px;
     border-radius: 12px;
-    width: 230px;
-    height: 400px;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .game_cover {
-    width: 215px;
-    height: 300px;
+    width: 100%;
+    aspect-ratio: 3 / 4; 
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 8px;
 }
 
 .game_cover img {
@@ -26,26 +29,27 @@
     object-fit: cover;
 }
 
-/* game info */
+/* Game info */
 .title {
-    color: #333;
-    font-size: 2rem;
+    color: #fff;
+    font-size: 1.5rem;
 }
 
 .game_info {
     margin-top: 12px;
     text-align: center;
+    color: white;
+    background-color: rgba(45, 45, 68, 0.4);
+    padding: 5px;
+    width: 90%;
+    border-radius: 8px;
 }
 
-
-/* wishlist button overlay */
+/* Wishlist overlay */
 .game_overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.2);
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.1);
     opacity: 0;
     transition: opacity 0.3s ease;
     border-radius: 12px;
@@ -61,8 +65,8 @@
 .wishlist_icon_btn {
     pointer-events: auto;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
     padding: 0;

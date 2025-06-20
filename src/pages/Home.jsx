@@ -7,7 +7,7 @@ import '../styles/Home.css'
 
 export default function Home() {
     const gameBanners = [
-    <GameBanner game={{ cover: "src/assets/E33banner.png", title: "Expedition 33", price: "$2.50", wishlisted: 0 }} />,
+    <GameBanner game={{ cover: "src/assets/E33banner.png", title: "Clair Obscur: Expedition 33", price: "$2.50", wishlisted: 0 }} />,
     <GameBanner game={{ cover: "src/assets/ERNRbanner.png", title: "Elden Ring: Nightreign", price: "$2.50", wishlisted: 0 }} />,
     <GameBanner game={{ cover: "src/assets/MWbanner.png", title: "Call of Duty: Modern Warfare", price: "$2.50", wishlisted: 0 }} />,
     <GameBanner game={{ cover: "src/assets/SDVbanner.png", title: "Stardew Valley", price: "$2.50", wishlisted: 0 }} />,
@@ -36,7 +36,7 @@ export default function Home() {
             <div className="centered-wrapper">
                 <h1 className="offset-box">Trending</h1>
             </div>
-            <div style={{display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
+            <div style={{display: 'flex', justifyContent: 'center', transform: 'scale(0.9) translateY(-50px)'}}>
                 <table>
                     <tr>
                     <th><GameCard game={{ cover: "src/assets/honse.png", title: "Honse 2", price: "$2.50", wishlisted: 0 }} /></th>
@@ -44,8 +44,10 @@ export default function Home() {
                     <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
                     <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
                     <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
                     </tr>
                     <tr>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
                     <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
                     <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
                     <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
@@ -56,7 +58,27 @@ export default function Home() {
             </div>
         {/* Discounted games */}
         <div className="centered-wrapper">
-                <h1 className="offset-box">Discounted</h1>
+            <h1 className="offset-box">Discounted</h1>
+        </div>
+        <div style={{display: 'flex', justifyContent: 'center', transform: 'scale(0.9) translateY(-50px)'}}>
+                <table>
+                    <tr>
+                    <th><GameCard game={{ cover: "src/assets/honse.png", title: "Honse 2", price: "$2.50", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/cowboy.png", title: "Cowboy Man", price: "$21.50", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    </tr>
+                    <tr>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                    </tr>
+                </table>
             </div>
         </div>
     );
