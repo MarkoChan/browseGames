@@ -1,27 +1,33 @@
-import './App.css'
-import GameCard from './components/GameCard'
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import './styles/Navbar.css';
+import './styles/Global.css';
 
 function App() {
   return (
-    <div>
-      <table>
-        <tr>
-            <th><GameCard game={{cover:"src/assets/honse.png", title:"Honse 2", price:"$2.50", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/cowboy.png", title:"Cowboy Man", price:"$21.50", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-        </tr>
-        <tr>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-            <th><GameCard game={{cover:"src/assets/_missing.png", title:"N/A", price:"$NAN", wishlisted: 0}}/></th>
-        </tr>
-      </table>
-    </div>
-  )
+    <Router>
+      <nav className="navbar">
+        <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Home
+        </NavLink>
+        <NavLink to="/Wishlist" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Wishlist
+        </NavLink>
+        <NavLink to="/Profile" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Profile
+        </NavLink>
+        <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          About
+        </NavLink>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

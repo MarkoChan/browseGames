@@ -1,0 +1,38 @@
+.page-wrapper {
+    min-height: 100vh;
+    background-color: rgb(33, 33, 41);
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.offset-box {
+    transform: translateX(-540px);
+}
+
+.searchInput {
+    width: 900px;
+    background-color: rgb(58, 58, 69);
+    color: #ffffff;
+    transform: translateX(-20px);
+    font-size: 1.2rem;
+    padding-left: 10px;
+    border: none;
+}
+
+.searchBtn {
+    background-color: rgb(83, 83, 94);
+    color: #ffffff;
+    margin-left:  10px;
+    transform: translateX(-20px);
+    font-size: 1.2rem;
+}

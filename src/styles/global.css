@@ -1,0 +1,10 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    background-color: rgb(33, 33, 41);
+    color: #ffffff;
+}
