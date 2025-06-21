@@ -9,4 +9,6 @@ body {
   background-image: radial-gradient(rgba(255,255,255, 0.3) 1px, transparent 1px);
   background-size: 20px 20px;
   color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
 }

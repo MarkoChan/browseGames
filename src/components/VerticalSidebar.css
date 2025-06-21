@@ -3,7 +3,6 @@
   overflow-y: auto;
   background-color: #252934;
   padding: 10px;
-  border-right: 1px solid #a9a9a9;
 }
 
 .sidebar-container::-webkit-scrollbar {

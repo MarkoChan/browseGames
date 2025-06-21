@@ -4,16 +4,80 @@
   overflow: hidden;
 }
 
-.sidebar {
-  width: 250px;
-  color: white;
-  overflow-y: auto;
+/* Hamburger button */
+.hamburger-btn {
+    position: absolute;
+    top: 70px;
+    right: 40px;
+    font-size: 1.8rem;
+    background: rgba(0,0,0,0.3);
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+    width: 40px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
 }
 
-.sidebar::-webkit-scrollbar {
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 300px;
+    height: 100vh;
+    background-color: rgb(30, 30, 38);
+    box-shadow: -2px 0 10px rgba(0,0,0,0.7);
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1002;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-panel::-webkit-scrollbar {
   width: 0;
   height: 0;
   background: transparent;
+}
+
+.sidebar-panel.open {
+    right: 0;
+}
+
+.sidebar-close-btn {
+    align-self: flex-end;
+    font-size: 2.5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-align: right;
 }
 
 .main {

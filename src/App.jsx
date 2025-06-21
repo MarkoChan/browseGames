@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
+import Wishlist from './pages/Wishlist';
 import './styles/Navbar.css';
 import './styles/Global.css';
 
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/Wishlist" element={<Wishlist/>} />
       </Routes>
     </Router>
   );
