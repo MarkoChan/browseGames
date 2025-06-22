@@ -1,0 +1,79 @@
+/* Full-screen center */
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(20, 20, 28);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Form container */
+.login-form {
+    background-color: rgb(30, 30, 38);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: white;
+}
+
+/* Heading */
+.login-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Input fields */
+.login-input {
+    background-color: rgb(50, 50, 59);
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    color: white;
+    font-size: 1rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.login-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(83, 83, 94);
+}
+
+/* Submit button */
+.login-btn {
+    background-color: rgb(83, 83, 94);
+    color: white;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: rgb(100, 100, 114);
+}
+
+/* Footer text */
+.login-footer {
+    font-size: 0.9rem;
+    text-align: center;
+    color: #aaa;
+}
+
+.login-footer a {
+    color: #fff;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.login-footer a:hover {
+    color: #ddd;
+}

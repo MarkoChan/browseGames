@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-do
 import Home from './pages/Home';
 import About from './pages/About';
 import Wishlist from './pages/Wishlist';
+import Login from './pages/Login';
+import Settings from './pages/Settings';
 import './styles/Navbar.css';
 import './styles/Global.css';
 
@@ -18,6 +20,9 @@ function App() {
         <NavLink to="/Profile" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
           Profile
         </NavLink>
+        <NavLink to="/Settings" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Settings
+        </NavLink>
         <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
           About
         </NavLink>
@@ -27,6 +32,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/Wishlist" element={<Wishlist/>} />
+        <Route path="/Profile" element={<Login/>} />
+        <Route path="/Settings" element={<Settings/>} />
       </Routes>
     </Router>
   );

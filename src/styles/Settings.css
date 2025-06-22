@@ -1,0 +1,58 @@
+/* Full page layout */
+.settings-page {
+    height: 100vh;
+    background-color: rgb(20, 20, 28);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 60px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Settings box */
+.settings-container {
+    background-color: rgb(30, 30, 38);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: white;
+}
+
+/* Title */
+.settings-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Setting item */
+.settings-option {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(45, 45, 58);
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.settings-option:hover {
+    background-color: rgb(55, 55, 70);
+}
+
+.settings-option input[type="checkbox"] {
+    accent-color: rgb(100, 100, 114);
+    transform: scale(1.2);
+}
+
+/* For nested/indented options */
+.settings-option.nested {
+    margin-left: 20px;
+    background-color: rgb(38, 38, 50);
+}
