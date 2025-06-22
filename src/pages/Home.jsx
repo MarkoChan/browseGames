@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import GameCard from '../components/GameCard';
 import Carousel from '../components/carousel';
 import GameBanner from '../components/GameBanner';
@@ -12,7 +13,9 @@ export default function Home() {
     // demo banners
     const gameBanners = [
         <GameBanner game={{ cover: "src/assets/E33banner.png", title: "Clair Obscur: Expedition 33", price: "$2.50", wishlisted: 0 }} />,
-        <GameBanner game={{ cover: "src/assets/ERNRbanner.png", title: "Elden Ring: Nightreign", price: "$2.50", wishlisted: 0 }} />,
+        <Link to="/gameinfo">
+        <GameBanner game={{ cover: "src/assets/ERNRbanner.png", title: "Elden Ring: Nightreign", price: "$2.50", wishlisted: 0 }} />
+        </Link>,
         <GameBanner game={{ cover: "src/assets/MWbanner.png", title: "Call of Duty: Modern Warfare", price: "$2.50", wishlisted: 0 }} />,
         <GameBanner game={{ cover: "src/assets/SDVbanner.png", title: "Stardew Valley", price: "$2.50", wishlisted: 0 }} />,
         <GameBanner game={{ cover: "src/assets/hadesBanner.png", title: "Hades", price: "$2.50", wishlisted: 0 }} />

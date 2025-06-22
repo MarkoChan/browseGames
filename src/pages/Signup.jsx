@@ -1,20 +1,23 @@
 import { useState } from 'react';
-import '../styles/Login.css';
+import { useNavigate } from 'react-router-dom';
+import '../styles/Signup.css';
 
-export default function Login() {
+export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    function handleLogin(e) {
+    function handleSignup(e) {
         e.preventDefault();
-        // TODO: Add auth logic
-        alert(`Logging in with:\nEmail: ${email}\nPassword: ${'*'.repeat(password.length)}`);
+        // TODO: add signup logic
+        alert(`Signing up with:\nEmail: ${email}\nPassword: ${'*'.repeat(password.length)}`);
+        navigate('/'); // redirect to home after signup
     }
 
     return (
         <div className="login-page">
-            <form className="login-form" onSubmit={handleLogin}>
-                <h1 className="login-title">Sign In</h1>
+            <form className="login-form" onSubmit={handleSignup}>
+                <h1 className="login-title">Sign Up</h1>
 
                 <input
                     type="email"
@@ -33,10 +36,10 @@ export default function Login() {
                     required
                 />
 
-                <button type="submit" className="login-btn">Log In</button>
+                <button type="submit" className="login-btn">Create Account</button>
 
                 <p className="login-footer">
-                    Don’t have an account? <a href="/signup">Sign up</a>
+                    Already have an account? <a href="/">Sign in</a>
                 </p>
             </form>
         </div>
