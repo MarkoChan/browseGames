@@ -2,13 +2,21 @@ import { useState } from 'react';
 import '../styles/Settings.css';
 import '../styles/Global.css';
 
-export default function Settings() {
-    // Toggle states
+export default function Settings({userEmail}) {
+    // toggle states
     const [hideNSFW, setHideNSFW] = useState(true);
     const [blurNSFW, setBlurNSFW] = useState(false);
     const [notifications, setNotifications] = useState(true);
     const [darkMode, setDarkMode] = useState(true);
     const [autoPlay, setAutoPlay] = useState(false);
+
+    // handle acc deact
+    function handleDeactivate() {
+        if (userEmail) {
+            alert(`Account deactivated for: ${userEmail}`);
+            // TODO: Add actual deactivation logic
+        }
+    }
 
     return (
         <div className="settings-page">
@@ -27,7 +35,7 @@ export default function Settings() {
                     </label>
                 </div>
 
-                {/* Blur NSFW (only shows if NSFW is allowed) */}
+                {/* Blur NSFW (only shows if NSFW allowed) */}
                 {!hideNSFW && (
                     <div className="settings-option nested">
                         <label>
@@ -75,6 +83,18 @@ export default function Settings() {
                         />
                         Auto-play game trailers
                     </label>
+                </div>
+
+                {/* Deactivate account */}
+                <div className="settings-option">
+                    <button
+                        className="deactivate-btn"
+                        onClick={handleDeactivate}
+                        disabled={!userEmail}
+                        title={!userEmail ? "Log in to deactivate your account" : ""}
+                    >
+                        Deactivate Account
+                    </button>
                 </div>
             </div>
         </div>

@@ -51,8 +51,31 @@
     transform: scale(1.2);
 }
 
-/* For nested/indented options */
+/* Nested/indented options */
 .settings-option.nested {
     margin-left: 20px;
     background-color: rgb(38, 38, 50);
+}
+
+
+/* Deact acc style */
+.deactivate-btn {
+    padding: 10px 16px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.deactivate-btn:hover:enabled {
+    background-color: #e64545;
+}
+
+.deactivate-btn:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    color: #ccc;
 }
