@@ -2,11 +2,46 @@ import { useState } from 'react';
 import GameCard from '../components/GameCard';
 import '../styles/Global.css';
 import '../styles/Home.css';
+import '../styles/Wishlist.css';
 
 export default function Wishlist() {
     // init state
     const [sortBy, setSortBy] = useState('price');
     const [showSortDropdown, setShowSortDropdown] = useState(false);
+    const [tagSearch, setTagSearch] = useState('');
+    const [selectedTags, setSelectedTags] = useState([]);
+
+    // init tag options
+    const allTags = [
+        'RPG', 'Action', 'Adventure', 'Puzzle', 'Strategy',
+        'Simulation', 'Shooter', 'Horror', 'Indie', 'Multiplayer',
+        'Fantasy', 'Sci-Fi', 'Survival', 'Platformer', 'Sports'
+    ];
+
+    // toggle tag selection
+    function toggleTag(tag) {
+        setSelectedTags(prev =>
+            prev.includes(tag)
+                ? prev.filter(t => t !== tag)
+                : [...prev, tag]
+        );
+    }
+
+    // filtered tag list based on search input and selection
+    const filteredTags = allTags
+        .filter(tag => tag.toLowerCase().includes(tagSearch.toLowerCase()) || selectedTags.includes(tag))
+        .sort((a, b) => {
+            const aSelected = selectedTags.includes(a);
+            const bSelected = selectedTags.includes(b);
+            if (aSelected && !bSelected) return -1;
+            if (!aSelected && bSelected) return 1;
+            return 0;
+        });
+
+    // determine how many tags to show (selected + 5 unselected minimum)
+    const visibleTagsCount = Math.max(selectedTags.length + 5, filteredTags.length);
+    const tagItemHeight = 36;
+    const tagListHeight = Math.min(visibleTagsCount, filteredTags.length) * tagItemHeight;
 
     // demo data
     const wishlistedGames = Array.from({ length: 24 }).map((_, index) => (
@@ -33,53 +68,38 @@ export default function Wishlist() {
     ];
 
     // sorting logic
-    function handleSort(val){
-        
+    function handleSort(val) {
+        setSortBy(val);
+        setShowSortDropdown(false);
+        // add sorting here
     }
 
     return (
         <div className="page-wrapper">
-            <h1 style={{ fontSize: '6.5rem', marginTop: '30px'}}>WISHLIST</h1>
+            <h1 className="wishlist-title">WISHLIST</h1>
+
             {/* Search Bar */}
-            <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
+            <div className="wishlist-search-bar">
                 <input className="searchInput" type="text" placeholder="Search..." />
                 <button className="searchBtn">Search</button>
             </div>
 
             {/* Filter Buttons */}
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '10px', position: 'relative' }}>
-                <button className="searchBtn" style={{ padding: '10px 20px' }}>Search by tags</button>
-                
+            <div className="wishlist-filter-bar">
                 {/* Sort Dropdown */}
-                <div style={{ position: 'relative', display: 'inline-block' }}>
-                    <button 
-                        className="searchBtn" 
-                        style={{ padding: '10px 20px' }}
+                <div className="sort-dropdown-wrapper">
+                    <button
+                        className="searchBtn sort-button"
                         onClick={() => setShowSortDropdown(!showSortDropdown)}
                     >
                         Sort by: {sortOptions.find(o => o.value === sortBy)?.label}
                     </button>
                     {showSortDropdown && (
-                        <div style={{
-                            position: 'absolute',
-                            backgroundColor: '#1a1a1a',
-                            minWidth: '160px',
-                            boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-                            zIndex: 1,
-                            borderRadius: '4px',
-                            overflow: 'hidden',
-                            right: 0
-                        }}>
+                        <div className="sort-dropdown">
                             {sortOptions.map((option) => (
                                 <div
                                     key={option.value}
-                                    style={{
-                                        padding: '12px 16px',
-                                        cursor: 'pointer',
-                                        color: sortBy === option.value ? '#fff' : '#aaa',
-                                        backgroundColor: sortBy === option.value ? '#333' : 'transparent',
-                                        fontWeight: sortBy === option.value ? 'bold' : 'normal'
-                                    }}
+                                    className={`sort-option ${sortBy === option.value ? 'selected' : ''}`}
                                     onClick={() => handleSort(option.value)}
                                 >
                                     {option.label}
@@ -90,17 +110,42 @@ export default function Wishlist() {
                 </div>
             </div>
 
-            {/* Wishlisted Games Grid */}
-            <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                    gap: '20px',
-                    padding: '40px',
-                    justifyItems: 'center',
-                }}
-            >
-                {wishlistedGames}
+            {/* Wishlist Section with Tag Sidebar */}
+            <div className="wishlist-content">
+                {/* Wishlisted Games Grid */}
+                <div className="wishlist-grid">
+                    {wishlistedGames}
+                </div>
+
+                {/* tag filter compartment */}
+                <div className="tag-filter-box">
+                    <h3 className="tag-filter-title">Filter by Tags</h3>
+
+                    {/* displayed tags */}
+                    <div
+                        className="tag-list"
+                        style={{ maxHeight: `${tagListHeight}px` }}
+                    >
+                        {filteredTags.slice(0, visibleTagsCount).map(tag => (
+                            <div
+                                key={tag}
+                                className={`tag-item ${selectedTags.includes(tag) ? 'selected' : ''}`}
+                                onClick={() => toggleTag(tag)}
+                            >
+                                {tag}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* search bar for tags */}
+                    <input
+                        className="tag-search"
+                        type="text"
+                        placeholder="Search tags..."
+                        value={tagSearch}
+                        onChange={e => setTagSearch(e.target.value)}
+                    />
+                </div>
             </div>
         </div>
     );
