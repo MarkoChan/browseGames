@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import GameCard from '../components/GameCard';
 import Carousel from '../components/carousel';
@@ -9,6 +9,17 @@ import '../styles/Home.css'
 
 export default function Home() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [trendingGames, setTrendingGames] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3001/api/trending')
+          .then(res => res.json())
+          .then(data => setTrendingGames(data))
+          .catch(err => console.error("Error fetching games:", err));
+      }, []);
+
+    const row1 = trendingGames.slice(0, 6);
+    const row2 = trendingGames.slice(6, 12);
 
     // demo banners
     const gameBanners = [
@@ -79,20 +90,18 @@ export default function Home() {
                         <table>
                             <tbody>
                                 <tr>
-                                    <th><GameCard game={{ cover: "src/assets/honse.png", title: "Honse 2", price: "$2.50", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/cowboy.png", title: "Cowboy Man", price: "$21.50", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                                    {row1.map((game) => (
+                                        <th key={game.id}>
+                                            <GameCard game ={{ cover: game.thumbnail, title: game.title, price: game.price, wishlisted: game.wishlisted }} />
+                                        </th>
+                                    ))}
                                 </tr>
                                 <tr>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
+                                {row2.map((game) => (
+                                        <th key={game.id}>
+                                            <GameCard game ={{ cover: game.thumbnail, title: game.title, price: game.price, wishlisted: game.wishlisted }} />
+                                        </th>
+                                    ))}
                                 </tr>
                             </tbody>
                         </table>
