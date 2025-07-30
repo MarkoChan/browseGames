@@ -1,16 +1,31 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import GameCard from '../components/GameCard';
 import '../styles/Global.css';
 import '../styles/Home.css';
 import '../styles/Wishlist.css';
 
-export default function Wishlist() {
+export default function Explore() {
+    const location = useLocation();
+
+    // helper to get query param from URL
+    function getQueryParam(param) {
+        const params = new URLSearchParams(location.search);
+        return params.get(param) || '';
+    }
+
+    // initialize searchQuery empty; will update after mount from URL
+    const [searchQuery, setSearchQuery] = useState('');
+
+    useEffect(() => {
+        setSearchQuery(getQueryParam('search'));
+    }, [location.search]);
+
     // init state
     const [sortBy, setSortBy] = useState('price');
     const [showSortDropdown, setShowSortDropdown] = useState(false);
     const [tagSearch, setTagSearch] = useState('');
     const [selectedTags, setSelectedTags] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
 
     // init tag options
     const allTags = [
@@ -20,15 +35,55 @@ export default function Wishlist() {
     ];
 
     // toggle tag selection
-    function toggleTag(tag) {
+    const toggleTag = (tag) => {
         setSelectedTags(prev =>
             prev.includes(tag)
                 ? prev.filter(t => t !== tag)
                 : [...prev, tag]
         );
-    }
+    };
 
-    // filtered tag list based on search input and selection
+    // generate demo games only once
+    const allGames = useMemo(() => {
+        return Array.from({ length: 24 }).map((_, i) => ({
+            id: i,
+            cover: "src/assets/_missing.png",
+            title: `Explore Game ${i + 1}`,
+            price: parseFloat((Math.random() * 60).toFixed(2)),
+            wishlisted: 0,
+            rating: parseFloat((Math.random() * 5).toFixed(1)),
+            discount: Math.random() > 0.7 ? Math.floor(Math.random() * 70) + 10 : null,
+            tags: [allTags[i % allTags.length]] // assign one tag for demo
+        }));
+    }, [allTags]);
+
+    // filter and sort games based on state
+    const filteredGames = useMemo(() => {
+        return allGames
+            .filter(game => {
+                // filter by search query in title
+                const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
+                // filter by selected tags (if any selected)
+                const matchesTags = selectedTags.length === 0 || selectedTags.every(tag => game.tags.includes(tag));
+                return matchesSearch && matchesTags;
+            })
+            .sort((a, b) => {
+                switch(sortBy) {
+                    case 'price':
+                        return a.price - b.price;
+                    case 'rating':
+                        return b.rating - a.rating;
+                    case 'discount':
+                        return (b.discount || 0) - (a.discount || 0);
+                    case 'title':
+                        return a.title.localeCompare(b.title);
+                    default:
+                        return 0;
+                }
+            });
+    }, [allGames, searchQuery, selectedTags, sortBy]);
+
+    // determine how many tags to show (selected + 5 unselected minimum)
     const filteredTags = allTags
         .filter(tag => tag.toLowerCase().includes(tagSearch.toLowerCase()) || selectedTags.includes(tag))
         .sort((a, b) => {
@@ -39,73 +94,33 @@ export default function Wishlist() {
             return 0;
         });
 
-    // determine how many tags to show (selected + 5 unselected minimum)
     const visibleTagsCount = Math.max(selectedTags.length + 5, filteredTags.length);
     const tagItemHeight = 36;
     const tagListHeight = Math.min(visibleTagsCount, filteredTags.length) * tagItemHeight;
 
-    // demo wishlist data
-    const games = Array.from({ length: 24 }).map((_, index) => ({
-        cover: "src/assets/_missing.png",
-        title: `Wishlisted Game ${index + 1}`,
-        price: `$${(Math.random() * 60).toFixed(2)}`,
-        wishlisted: 1,
-        rating: (Math.random() * 5).toFixed(1),
-        discount: Math.random() > 0.7 ? `${Math.floor(Math.random() * 70) + 10}%` : null,
-        tags: [allTags[index % allTags.length], allTags[(index + 3) % allTags.length]]
-    }));
-
-    // init sort options
+    // init sort options without 'recent'
     const sortOptions = [
         { value: 'price', label: 'Price' },
         { value: 'rating', label: 'Rating' },
         { value: 'discount', label: 'Discount' },
-        { value: 'title', label: 'Alphabetical' },
-        { value: 'recent', label: 'Recently Added' }
+        { value: 'title', label: 'Alphabetical' }
     ];
 
-    // sorting logic
-    function handleSort(val) {
+    // sorting logic handler
+    const handleSort = (val) => {
         setSortBy(val);
         setShowSortDropdown(false);
-    }
+    };
 
-    // filter by search and tags
-    const filteredGames = useMemo(() => {
-        return games.filter(game => {
-            const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
-            const matchesTags = selectedTags.length === 0 || selectedTags.every(tag => game.tags.includes(tag));
-            return matchesSearch && matchesTags;
-        })
-        .sort((a, b) => {
-            if (sortBy === 'price') {
-                return parseFloat(a.price.slice(1)) - parseFloat(b.price.slice(1));
-            } else if (sortBy === 'rating') {
-                return parseFloat(b.rating) - parseFloat(a.rating);
-            } else if (sortBy === 'discount') {
-                const aDiscount = a.discount ? parseInt(a.discount) : 0;
-                const bDiscount = b.discount ? parseInt(b.discount) : 0;
-                return bDiscount - aDiscount;
-            } else if (sortBy === 'title') {
-                return a.title.localeCompare(b.title);
-            } else if (sortBy === 'recent') {
-                return 0; // no real date so keep original order
-            }
-            return 0;
-        });
-    }, [games, searchQuery, selectedTags]);
-
-    
-
-
-    // search function
-    function handleSearch(e) {
+    // search submit handler
+    const handleSearch = (e) => {
         e.preventDefault();
-    }
+        // your search/filter is reactive so no extra logic needed here
+    };
 
     return (
         <div className="page-wrapper">
-            <h1 className="wishlist-title">WISHLIST</h1>
+            <h1 className="wishlist-title">EXPLORE</h1>
 
             {/* search bar */}
             <form onSubmit={handleSearch} className='search-form' style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
@@ -145,12 +160,24 @@ export default function Wishlist() {
                 </div>
             </div>
 
-            {/* wishlist section with tag sidebar */}
+            {/* explore section with tag sidebar */}
             <div className="wishlist-content">
-                {/* wishlisted games grid */}
+                {/* games grid */}
                 <div className="wishlist-grid">
-                    {filteredGames.map((game, index) => (
-                        <GameCard key={index} game={game} />
+                    {filteredGames.map(game => (
+                        <div className="card-wrapper" key={game.id}>
+                            <GameCard
+                                key={game.id}
+                                game={{
+                                    cover: game.cover,
+                                    title: game.title,
+                                    price: `$${game.price.toFixed(2)}`,
+                                    wishlisted: game.wishlisted,
+                                    rating: game.rating.toFixed(1),
+                                    discount: game.discount ? `${game.discount}%` : null
+                                }}
+                            />
+                        </div>
                     ))}
                 </div>
 

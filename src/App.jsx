@@ -6,6 +6,7 @@ import Wishlist from './pages/Wishlist';
 import Signup from './pages/Signup';
 import Settings from './pages/Settings';
 import GameInfo from './pages/GameInfo';
+import Explore from './pages/Explore';
 import './styles/Navbar.css';
 import './styles/Global.css';
 
@@ -95,6 +96,7 @@ function App() {
         <Route path="/Settings" element={<Settings userEmail={userEmail} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/gameinfo" element={<GameInfo />} />
+        <Route path="/explore" element={<Explore />} />
       </Routes>
     </Router>
   );

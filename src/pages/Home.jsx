@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GameCard from '../components/GameCard';
 import Carousel from '../components/carousel';
 import GameBanner from '../components/GameBanner';
@@ -9,6 +9,8 @@ import '../styles/Home.css'
 
 export default function Home() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const navigate = useNavigate();
 
     // demo banners
     const gameBanners = [
@@ -21,17 +23,40 @@ export default function Home() {
         <GameBanner game={{ cover: "src/assets/hadesBanner.png", title: "Hades", price: "$2.50", wishlisted: 0 }} />
     ];
 
+    // demo gamecards
+    const gameCards = [
+        <GameCard game={{ cover: "src/assets/honse.png", title: "Honse 2", price: "$2.50", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/cowboy.png", title: "Cowboy Man", price: "$21.50", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />,
+        <GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} />
+    ];
+
     // demo genres
     const genres = ["Action", "Adventure", "RPG", "Shooter", "Strategy", "Simulation", "Sports", "Racing", "Puzzle", "Platformer", "Fighting", "Horror", "MMO", "Sandbox", "Stealth", "Survival", "Rhythm", "Card Game", "Turn-Based", "Roguelike"];
 
-    // Toggle sidebar open/close
-    const toggleSidebar = () => {
+    // toggle sidebar open/close
+    function toggleSidebar() {
         setSidebarOpen(!sidebarOpen);
     };
 
-    // Close sidebar
-    const closeSidebar = () => {
+    // close sidebar
+    function closeSidebar() {
         setSidebarOpen(false);
+    };
+
+    // search function
+    function handleSearch(e) {
+         e.preventDefault(); // prevent form default submission
+        // navigate to /explore with search query as URL param
+        navigate(`/explore?search=${encodeURIComponent(searchQuery)}`);
     };
 
     return (
@@ -55,10 +80,11 @@ export default function Home() {
                     </button>
 
                     {/* Search Bar */}
-                    <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
-                        <input className='searchInput' type="text" placeholder="Search..." />
-                        <button className='searchBtn'>Search</button>
-                    </div>
+                    <form onSubmit={handleSearch} className='search-form' style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
+                        <input className='search-input' type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
+                        <button type='submit'className='search-btn'>Search</button>
+                    </form>
+                    
                     <br></br>
                     {/* Game banner Carousel */}
                     <div className="centered-wrapper">
@@ -75,53 +101,23 @@ export default function Home() {
                     <div className="centered-wrapper">
                         <h1 className="offset-box">Trending</h1>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'center', transform: 'scale(0.9) translateY(-50px)' }}>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th><GameCard game={{ cover: "src/assets/honse.png", title: "Honse 2", price: "$2.50", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/cowboy.png", title: "Cowboy Man", price: "$21.50", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                </tr>
-                                <tr>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', transform: 'scale(0.9) translateY(-50px)' }}>
+                        {gameCards.map((card, index) => (
+                            <div key={index} id={`card-${index}`} style={{ flex: '0 0 calc(100% / 6 - 40px)', padding: '2px' }}>
+                            {card}
+                            </div>
+                        ))}
                     </div>
                     {/* Discounted games */}
                     <div className="centered-wrapper">
                         <h1 className="offset-box">Discounted</h1>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'center', transform: 'scale(0.9) translateY(-50px)' }}>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th><GameCard game={{ cover: "src/assets/honse.png", title: "Honse 2", price: "$2.50", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/cowboy.png", title: "Cowboy Man", price: "$21.50", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                </tr>
-                                <tr>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                    <th><GameCard game={{ cover: "src/assets/_missing.png", title: "N/A", price: "$NAN", wishlisted: 0 }} /></th>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', transform: 'scale(0.9) translateY(-50px)' }}>
+                    {gameCards.map((card, index) => (
+                        <div key={index} id={`card-${index}`} style={{ flex: '0 0 calc(100% / 6 - 40px)', padding: '2px' }}>
+                        {card}
+                        </div>
+                    ))}
                     </div>
                 </div>
             </div>

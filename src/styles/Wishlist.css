@@ -57,12 +57,22 @@
     gap: 40px;
 }
 
+/* wishlist-grid layout */
 .wishlist-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+  flex: 1;
+  padding: 20px;
 }
+
+/* consistent wrapper for each game card */
+.card-wrapper {
+  height: 450px; /* Adjust to match GameCard height */
+  display: flex;
+  align-items: stretch;
+}
+
 
 /* Tag Sidebar */
 .tag-filter-box {
